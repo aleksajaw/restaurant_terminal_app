@@ -1,0 +1,11 @@
+[
+    {
+        "menuName": "Menu Swojskie",
+        "menuCurrency": "PLN",
+        "dishList": [
+            { "position": 1, "dish": { "dishName": "surowka", "weight": { "weightValue": 300, "unit": "g" } }, "price": { "standard": 3.5, "current": 3.5, "isPromotion": false  } },
+            { "position": 2, "dish": { "dishName": "ziemniaczki", "weight": { "weightValue": 350, "unit": "g" } }, "price": { "standard": 12.99, "current": 12.99, "isPromotion": false } },
+            { "position": 3, "dish": { "dishName": "test", "weight": { "weightValue": 9094809853, "unit": "g" } }, "price": { "standard": 10.0, "current": 10.0, "isPromotion": false} }
+        ]
+    }
+]

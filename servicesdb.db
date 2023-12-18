@@ -1,0 +1,27 @@
+{
+    "startServices": { "innerController": "authorization.", "servicesList": [{ "name": "Login", "partOfFunction": "getPermissions()", "needPermission": false }] },
+    "mainServices": {
+        "innerController": "changeMainChosenService",
+        "servicesList": [
+            { "name": "Menu", "partOfFunction": "('menu')", "needPermission": false },
+            { "name": "Zamówienia", "partOfFunction": "('orders')", "needPermission": false }
+        ]
+    },
+    "menuServices": {
+        "innerController": "menuController.",
+        "servicesList": [
+            { "name": "Wyświetl menu", "partOfFunction": "printMenu", "needPermission": false },
+            { "name": "Dodaj danie do menu", "partOfFunction": "addMenuElement", "needPermission": true },
+            { "name": "Edytuj danie z menu", "partOfFunction": "editMenuElement", "needPermission": true },
+            { "name": "Usuń danie z menu", "partOfFunction": "deleteMenuElement", "needPermission": true }
+        ]
+    },
+    "ordersServices": {
+        "innerController": "ordersController.",
+        "servicesList": [
+            { "name": "Wyświetl zamówienia", "partOfFunction": "printOrders", "needPermission": false },
+            { "name": "Dodaj nowe zamówienie", "partOfFunction": "addOrder", "needPermission": true },
+            { "name": "Usuń jedno zamówienie", "partOfFunction": "deleteOrder", "needPermission": true }
+        ]
+    }
+}

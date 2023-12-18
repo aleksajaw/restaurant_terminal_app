@@ -1,0 +1,50 @@
+{
+  "name": "Menu Swojskie",
+  "currency": "PLN",
+  "menu": [
+    {
+      "name": "kotlet schabowy",
+      "price": 5
+    },
+    {
+      "name": "surowka",
+      "price": 3.5
+    },
+    {
+      "name": "ziemniaczki",
+      "price": 10
+    },
+    {
+      "name": "kompot",
+      "price": 2
+    },
+    {
+      "name": "rosol",
+      "price": 4.5
+    },
+    {
+      "name": "grzybowa",
+      "price": 5
+    },
+    {
+      "name": "kotlet weganski",
+      "price": 5.5
+    },
+    {
+      "name": "de volaille",
+      "price": 7
+    },
+    {
+      "name": "frytki",
+      "price": 9
+    },
+    {
+      "name": "mizeria",
+      "price": 4.5
+    },
+    {
+      "name": "Przewody z Ethernetu wg przepisu Pana Darka Szymańskiego",
+      "price": "10.9"
+    }
+  ]
+}

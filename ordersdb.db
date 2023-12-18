@@ -1,0 +1,26 @@
+[
+    {
+        "orderID": 567456,
+        "dateTime": "13:09:57 Thursday 01 Jul 2021",
+        "orderElements": [
+            {
+                "dish" : {
+                            "name": "surowka",
+                            "weight": {
+                                        "weightValue": 300,
+                                        "unit": "g"
+                                    }
+                        },
+                "price": {
+                            "standard": 3.5,
+                            "current": 3.5,
+                            "isPromotion": false  
+                        },
+                "amount": 3,
+                "totalElementPrice": 10.5
+            }
+        ],
+        "totalPrice": 10.5,
+        "orderCurrency": "PLN"
+    }
+]
