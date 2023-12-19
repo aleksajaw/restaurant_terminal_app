@@ -26,6 +26,7 @@ def inputCorrectPassword(user):
     attempt = 0
     correctPass = False
 
+    ### logging attempt counter ###
     while attempt < 3 and not correctPass:
         inputPassword = getpass.getpass('Hasło: ')
 
@@ -55,12 +56,15 @@ def getPermissions():
 
         if userLogin:
 
-            isUserLogged = (not usersController.isUserHavePassword(userLogin)) or inputCorrectPassword(userLogin)
+            isUserLogged = (not usersController.isUserHavePassword(userLogin))  or  inputCorrectPassword(userLogin)
 
             if isUserLogged:
                 msg = 'ZALOGOWANO.'
 
             else:
+
+                # after 3 unsuccessful logging attempts as the selected user
+                # log as guest
                 general.alertYouCannotGet('uprawnień wybranego użytkownika')
                 msg = 'zalogowano jako gość' 
 
