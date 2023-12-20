@@ -5,6 +5,10 @@ import stepsManager
 import random
 
 
+# Following functions and variables were created to achieve greater coherence and order in code.
+
+
+
 ###   G L O B A L   V A R I A B L E S   ###
 
 booleanValues = {
@@ -43,6 +47,8 @@ def printInformation(textTitle = '', baseText = '', partOfText = '', hasLine = F
 
 ###   R E M I N D E R S   /   D E F A U L T   M E S S A G E S   ###
 
+# "Reminders" are things which should be attached to each step.
+
 def getReminder( reminder ):
     return convertReminder(reminder)
 
@@ -55,6 +61,7 @@ def getExitAppReminder():
     global exitAppReminder
     getReminder(exitAppReminder)
 
+### 'name' property of every single reminder is a word, which should be typing to call the appropriate command
 exitAppReminder = { 'name' : 'exit',
                     'description' : 'zamknąć aplikację',
                     'fnLocation' : 'general',
@@ -258,14 +265,16 @@ def isNumber(str):
 
 ###   V A L U E   C O N V E R S I O N   ###
 
-def convertNumberType(nr, nrType = 'int', roundLimit = 2):
+def convertNumberType(nr, desiredType = 'int', roundLimit = 2):
     nrValue = nr
     if nrValue:
         try:
             if isinstance(nrValue, str):
                 nrValue = correctNrNotation(nrValue)
+
             nrValue = round(float(nrValue), roundLimit)
-            if nrType == 'int':
+
+            if desiredType == 'int':
                 nrValue = int(nrValue)
 
             #printInformation( ( 'Konwersja wartości %s: z %s na %d %s.' % (nr, type(nr), nrValue, type(nrValue) ) ) )
@@ -311,24 +320,36 @@ def printDict(el):
 
 
 
+
 ###   I N P U T   V A L I D A T I O N   ###
 
-def getNumberInputValueWithValidation(partOfText = '', nrType = 'int', defaultValue = 0, roundLimit = 2, noLessThan = 0.01, noMoreThan = None):
-    from stepsManager import stepBack
-    inputCommandText = 'Podaj'
-    if partOfText != '': inputCommandText += ' ' + partOfText
-    inputCommandText += ': '
+def getNumberInputValueWithValidation(baseText = '', partOfText = '', desiredType = 'int', defaultValue = 0, roundLimit = 2, noLessThan = 0.01, noMoreThan = None):
+        # BEGINNING of the universal part #
 
+    ### variables correction & declaration ###
+    baseText = baseText or 'Podaj'
+    sentenceMark = ':'
+
+    ###
+    if partOfText:
+        partOfText = ' ' + partOfText
+
+    ###
+    inputCommandText = baseText + partOfText + sentenceMark + ' '
+
+    ### set initial value ###
     inputValue = defaultValue
+
+        # END of an universal part #
 
     while isElementValueDefault(inputValue, defaultValue):
 
         inputValue = removeSpaces(input(inputCommandText))
         
         if inputValue in stepBackNames:
-            stepBack(inputValue, True)
+            stepsManager.stepBack(inputValue, True)
         
-        if not len(inputValue):
+        elif not len(inputValue):
             alertNoCommand()
 
         elif not isNumber(inputValue):
@@ -336,7 +357,7 @@ def getNumberInputValueWithValidation(partOfText = '', nrType = 'int', defaultVa
             inputValue = None
 
         else:
-            convertedValue = convertNumberType(inputValue, nrType, roundLimit)
+            convertedValue = convertNumberType(inputValue, desiredType, roundLimit)
 
             if convertedValue < noLessThan:
                 alertYouCannot('podać liczby mniejszej od ' + str(noLessThan))
@@ -349,51 +370,84 @@ def getNumberInputValueWithValidation(partOfText = '', nrType = 'int', defaultVa
     return convertedValue
 
 
-def getStringBooleanValueWithValidation(baseText = '', keyName = '', defaultValue = None):
-    from stepsManager import stepBack
+def getStringBooleanValueWithValidation(introductoryText = '', baseText = '', partOfText = '', keyName = '', defaultValue = None):
     global booleanValues
+
+        # BEGINNING of the universal part #
+
+    ### variables correction & declaration ###
+    baseText = baseText or 'Czy'
     sentenceMark = '?'
 
-    inputCommandText = ( baseText
-                            if baseText != ''
-                            else 'Czy' + sentenceMark ) + ' (t/n) '
-    inputAlertText = 'podać liczby jako wartość'
+    ###
+    if partOfText:
+        partOfText = ' ' + partOfText 
     
-    if keyName != '':
+    ###
+    inputCommandText = baseText + partOfText + sentenceMark + ' (t/n) '
+
+    ###
+    inputAlertText = 'podać liczby jako wartość'
+    if keyName:
         inputAlertText += ' ' + keyName
 
+    ### set initial value ###
     inputValue = defaultValue
 
+        # END of the universal part #
+
+
+    ### A loop without any special condtions
+    ### just waits for an action called inside
     while True:
+        
+        if introductoryText:
+            print(introductoryText)
+    
         inputValue = removeSpaces(input(inputCommandText))
         
         if inputValue in stepBackNames:
-            stepBack(inputValue)
+            stepsManager.stepBack(inputValue)
 
-        if isNumber(inputValue):
+        elif isNumber(inputValue):
            alertYouCannot(inputAlertText)
            inputValue = ''
 
         else:
-            return inputValue in (booleanValues['trueValues'])  and  inputValue not in (booleanValues['falseValues'])
+            isInputValueTrue = inputValue in (booleanValues['trueValues'])
+            isInputValueFalse = inputValue in (booleanValues['falseValues'])
+
+            return isInputValueTrue and not isInputValueFalse
 
 
 def getStringInputValueWithValidation(baseText = '', partOfText = '', availableValues = [], defaultValue = None):
-    from stepsManager import stepBack
-    sentenceMark = ': '
+        ### BEGINNING of the universal part ###
+
+    ### variables correction & declaration ###
     baseText = baseText or 'Podaj'
-    if partOfText: partOfText = ' ' + partOfText
+    sentenceMark = ': '
+
+    ###
+    if partOfText:
+        partOfText = ' ' + partOfText
+
+    ###
     inputCommandText = baseText + partOfText + sentenceMark
 
+    ### set initial value ###
     inputValue = defaultValue
+
+        ### END of the universal part ###
+
 
     while isElementValueDefault(inputValue, defaultValue):
         inputValue = input(inputCommandText)
 
         if inputValue in stepBackNames:
-            stepBack(inputValue)
+            stepsManager.stepBack(inputValue)
 
-        cannotInput = ( ( len(availableValues)  and  inputValue not in availableValues )
+        isValuesLimitInUse = bool( len(availableValues) )
+        cannotInput = ( ( isValuesLimitInUse  and  inputValue not in availableValues )
                             or isNumber(inputValue) )
 
         if cannotInput:
