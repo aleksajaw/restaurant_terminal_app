@@ -19,7 +19,7 @@ def inputStepService(filteredServices = [], servicesInnerController=''):
     
     isInputNumberType = bool(nrLimit)
     
-    serviceInput = ( general.getNumberInputValueWithValidation('numer wybranego polecenia', 'int', '', 0, 1, nrLimit)
+    serviceInput = ( general.getNumberInputValueWithValidation('', 'numer wybranego polecenia', 'int', '', 0, 1, nrLimit)
                         if isInputNumberType
                         else general.getStringInputValueWithValidation('Które polecenie wybierasz', '', general.filteredStepBackNames ) )
 

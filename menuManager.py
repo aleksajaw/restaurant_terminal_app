@@ -81,7 +81,7 @@ class Dish:
 
 
     def inputWeightValue(self):
-        inputValue = general.getNumberInputValueWithValidation('wagę lub objętość w formie liczby całkowitej', 'int', 0, 0, 1)
+        inputValue = general.getNumberInputValueWithValidation('', 'wagę lub objętość w formie liczby całkowitej', 'int', 0, 0, 1)
         self.setWeightValue(inputValue)
 
 
@@ -174,7 +174,7 @@ class MenuElement:
 
 
     def inputPrice(self):
-        inputValue = general.getNumberInputValueWithValidation('cenę', 'float')
+        inputValue = general.getNumberInputValueWithValidation('', 'cenę', 'float')
         elPrice = inputValue
         self.setPrice(elPrice)
 
@@ -290,7 +290,7 @@ class Menu:
             inputCommandText += ' ' + partOfText
 
         inputNrLimit = (len(self.dishList))
-        inputValue = general.getNumberInputValueWithValidation( inputCommandText, 'int', 0, 0, 1, inputNrLimit )
+        inputValue = general.getNumberInputValueWithValidation('', inputCommandText, 'int', 0, 0, 1, inputNrLimit)
         #if inputValue:
         position = inputValue
         return position

@@ -118,7 +118,7 @@ class Order:
                 print(menuEl.getFullInfo())
                 fullMenuEl = menuEl.getDishWithPrice()
 
-                amount = general.getNumberInputValueWithValidation( 'ilość', 'int', 0, 0, 1)
+                amount = general.getNumberInputValueWithValidation('', 'ilość', 'int', 0, 0, 1)
                 fullMenuEl.amount = amount
 
                 fullMenuEl = OrderElement(**general.getDict(fullMenuEl))
@@ -240,7 +240,7 @@ class Orders:
         if inputCommandText:
             inputCommandText += ' ' + partOfText
 
-        inputValue = general.getNumberInputValueWithValidation( inputCommandText, 'int', '', 0, 1 )
+        inputValue = general.getNumberInputValueWithValidation('', inputCommandText, 'int', '', 0, 1)
         #if inputValue:
         position = inputValue
         return position
