@@ -4,6 +4,7 @@ from datetime import datetime
 import general
 import menuManager
 
+
 defaultCurrency = menuController.getMenuCurrency()
 
 

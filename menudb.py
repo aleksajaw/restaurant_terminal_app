@@ -2,6 +2,7 @@ import json
 import os
 import general
 
+
 defaultMenuCurrency = "PLN"
 defaultMenuName = "MENU"
 draftMenuDB = [{ "menuName": defaultMenuName, "menuCurrency": defaultMenuCurrency, "dishList" : []}]

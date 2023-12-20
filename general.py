@@ -4,6 +4,7 @@ import sys
 import stepsManager
 import random
 
+
 ###   G L O B A L   V A R I A B L E S   ###
 
 booleanValues = {

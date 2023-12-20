@@ -1,6 +1,4 @@
 import general
-import authorization
-import general
 
 
 mainChosenService = ''

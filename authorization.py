@@ -1,6 +1,5 @@
  
 import general
-import stepsManager
 from usersManager import usersController
 import getpass
 
