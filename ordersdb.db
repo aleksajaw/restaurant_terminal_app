@@ -1,26 +1,23 @@
 [
     {
-        "orderID": 567456,
-        "dateTime": "13:09:57 Thursday 01 Jul 2021",
+        "orderID": 488158,
+        "dateTime": "16:21:38 Monday 18 Dec 2023",
+        "orderElements": [{ "dish": { "dishName": "Deser lodowy", "weight": { "weightValue": 400, "unit": "g" } }, "amount": 2, "price": { "standard": 0.0, "current": 10.99, "isPromotion": false }, "totalElementPrice": 21.98 }],
+        "totalPrice": 21.98,
+        "orderCurrency": "PLN"
+    },
+    {
+        "orderID": 790138,
+        "dateTime": "16:22:00 Monday 18 Dec 2023",
         "orderElements": [
-            {
-                "dish" : {
-                            "name": "surowka",
-                            "weight": {
-                                        "weightValue": 300,
-                                        "unit": "g"
-                                    }
-                        },
-                "price": {
-                            "standard": 3.5,
-                            "current": 3.5,
-                            "isPromotion": false  
-                        },
-                "amount": 3,
-                "totalElementPrice": 10.5
-            }
+            { "dish": { "dishName": "Ros\u00f3\u0142", "weight": { "weightValue": 500, "unit": "ml" } }, "amount": 2, "price": { "standard": 0.0, "current": 10.0, "isPromotion": false }, "totalElementPrice": 20.0 },
+            { "dish": { "dishName": "Kurczak", "weight": { "weightValue": 350, "unit": "g" } }, "amount": 2, "price": { "standard": 0.0, "current": 12.99, "isPromotion": false }, "totalElementPrice": 25.98 },
+            { "dish": { "dishName": "Ziemniaczki", "weight": { "weightValue": 450, "unit": "g" } }, "amount": 2, "price": { "standard": 0.0, "current": 11.99, "isPromotion": false }, "totalElementPrice": 23.98 },
+            { "dish": { "dishName": "Sur\u00f3wka", "weight": { "weightValue": 250, "unit": "g" } }, "amount": 2, "price": { "standard": 0.0, "current": 7.99, "isPromotion": false }, "totalElementPrice": 15.98 },
+            { "dish": { "dishName": "Kompot", "weight": { "weightValue": 250, "unit": "ml" } }, "amount": 2, "price": { "standard": 0.0, "current": 3.99, "isPromotion": false }, "totalElementPrice": 7.98 },
+            { "dish": { "dishName": "Deser lodowy", "weight": { "weightValue": 400, "unit": "g" } }, "amount": 2, "price": { "standard": 0.0, "current": 10.99, "isPromotion": false }, "totalElementPrice": 21.98 }
         ],
-        "totalPrice": 10.5,
+        "totalPrice": 115.9,
         "orderCurrency": "PLN"
     }
 ]

@@ -1,1 +1,4 @@
-[{"login":"guest","password":"","hasPassword":false,"isAdmin":false},{"login":"admin","password":"123","hasPassword":true,"isAdmin":true}]
+[
+    { "login": "guest", "password": "", "hasPassword": false, "isAdmin": false },
+    { "login": "admin", "password": "123", "hasPassword": true, "isAdmin": true }
+]
