@@ -1,5 +1,5 @@
 import general
-
+import authorization
 
 mainChosenService = ''
 currentServiceStep = 0
