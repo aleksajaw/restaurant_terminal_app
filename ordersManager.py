@@ -131,7 +131,7 @@ class Order:
                 self.orderElements.append(fullMenuEl)
                 self.setTotalPrice(self.countTotalPrice())
                 
-                orderingMsg = '\nZamówienie\n' + orderList + '\n' + self.getTotalPriceMsg()
+                orderingMsg = '\n\nZamówienie\n' + orderList + '\n' + self.getTotalPriceMsg()
                 print(orderingMsg)
 
                 continueOrdering = general.getStringBooleanValueWithValidation('Czy kontynuować zamawianie?')
@@ -228,9 +228,11 @@ class Orders:
 
     def printOrders(self):
         msg = ''
-        for order in self.list:
-            msg += '\n' + order.getFullInfo()
-        general.printInformation('Zamówienia', msg, '', True)
+        for i, order in enumerate(self.list):
+            if i > 0:
+                msg += '\n' * 2
+            msg += order.getFullInfo()
+        general.printInformation(' - ZAMÓWIENIA - ', msg, '', True)
         if not msg:
             general.alertNoElements('zamówień')
 

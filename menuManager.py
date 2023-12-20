@@ -270,7 +270,7 @@ class Menu:
         dishList = self.dishList
         for menuElement in dishList:
             msg += '\n' + menuElement.getFullInfo(menuCurrency)
-        general.printInformation(self.menuName, msg, '', True)
+        general.printInformation('- ' + self.menuName + ' -', msg, '', True)
         
         if not len(dishList):
             general.alertNoElements('pozycji w menu')
