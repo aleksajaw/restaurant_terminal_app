@@ -16,6 +16,8 @@ def inputCorrectLogin():
         if usersController.doesUserExist(inputLogin):
             correctLogin = inputLogin
             break
+        else:
+            general.printInformation('', 'Może chcesz się zalogować jako gość? Wpisz "guest"')
 
     return correctLogin
 
