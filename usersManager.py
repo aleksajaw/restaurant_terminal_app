@@ -32,15 +32,15 @@ class Users:
         self.setIsLoggedAsAdmin( False )
 
 
-    def isUserExist(self, userName):
-        return usersDBController.isUsersRecordExist(userName)
+    def doesUserExist(self, userName):
+        return usersDBController.doesUsersRecordExist(userName)
 
 
     def hasAdminPermissions(self, login):
         return usersDBController.getUsersRecordKeyValue(login, 'isAdmin')
 
 
-    def isUserHavePassword(self, login):
+    def doesUserHavePassword(self, login):
         return usersDBController.getUsersRecordKeyValue(login, 'hasPassword')
 
 

@@ -6,10 +6,10 @@ import general
 class UsersDB:
     def __init__(self):
         self.location = os.path.expanduser('usersdb.db')
-        self.loadDB(self.location)
+        self.loadUsersDB(self.location)
 
 
-    def loadDB(self, location):
+    def loadUsersDB(self, location):
         draftUserDB = [{ "login": "guest", "password": "", "hasPassword": False }]
         if os.path.exists(location):
             try:
@@ -21,13 +21,13 @@ class UsersDB:
         return True
 
 
-    def isUsersRecordExist(self, login):
+    def doesUsersRecordExist(self, login):
         checkingResult = self.getUserRecord(login) != None
         if not checkingResult: general.printInformation('', 'Może chcesz się zalogować jako gość? Wpisz "guest"')
         return checkingResult
 
 
-    def getUserRecord(self, login):
+    def getUsersRecord(self, login):
         result = None
         try:
             result = [record  for record in self.db  if record['login'] == login][0]
@@ -38,7 +38,7 @@ class UsersDB:
 
 
     def checkUsersRecordKeyValue(self, login, key, value):
-        userRecord =  self.getUserRecord(login)
+        userRecord =  self.getUsersRecord(login)
         result = None
         try:
             result = (userRecord[key] == value)
@@ -49,7 +49,7 @@ class UsersDB:
 
 
     def getUsersRecordKeyValue(self, login, key):
-        userRecord =  self.getUserRecord(login)
+        userRecord = self.getUsersRecord(login)
         result = None
         try:
             result = userRecord[key]

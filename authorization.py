@@ -13,7 +13,7 @@ def inputCorrectLogin():
         attempt+1
         inputLogin = general.getStringInputValueWithValidation('Login')
 
-        if usersController.isUserExist(inputLogin):
+        if usersController.doesUserExist(inputLogin):
             correctLogin = inputLogin
             break
 
@@ -55,7 +55,7 @@ def getPermissions():
 
         if userLogin:
 
-            isUserLogged = (not usersController.isUserHavePassword(userLogin))  or  inputCorrectPassword(userLogin)
+            isUserLogged = (not usersController.doesUserHavePassword(userLogin))  or  inputCorrectPassword(userLogin)
 
             if isUserLogged:
                 msg = 'ZALOGOWANO.'
