@@ -490,6 +490,7 @@ def loadDB(location):
         try:
             db = json.load(open(location, 'r', encoding="utf-8"))
             #print(db)
+
         except json.decoder.JSONDecodeError:
             printInformation('', 'String could not be converted to JSON.')
     return db
@@ -499,6 +500,7 @@ def dumpDB(db, location):
     try:
         json.dump(db, open(location, 'w+', encoding="utf-8"))
         return True
+
     except:
         return False
 
@@ -508,10 +510,45 @@ def dumpPartOfDB(partOfDB, location, dbKey):
         oldDB = loadDB(location)
         dbIndexToChange = [i  for i, db in enumerate(loadDB(location))  if db[dbKey] == partOfDB[dbKey]][0]
         oldDB[dbIndexToChange] = partOfDB
+
         dumpDB(oldDB, location)
         return True
+
     except:
         print('error')
+        return False
+
+
+def getDBRecordByKeyValue(dbElements = [], keyName = '', desiredValue = None, alertText = ''):
+    try:
+        result = [  record
+                    for record in dbElements
+                        if record[keyName] == desiredValue ][0]
+        return result
+
+    except:
+        msg = 'rekordem'
+        if alertText:
+            msg = ' ' + alertText
+        alertProblemExist(msg)
+        return False
+
+
+def checkIfDBRecordExist(dbElements = [], keyToCompare = 'id', baseOfExpectedValue = None, addKeyToBasement = True):
+    if not '[' == keyToCompare[0]:
+        keyToCompare = '.' + keyToCompare
+    
+    if addKeyToBasement:
+        if keyToCompare  and  isinstance(baseOfExpectedValue, (object, dict)):
+            baseOfExpectedValue = eval('baseOfExpectedValue' + keyToCompare)
+
+    try:
+        result = bool( len([ i  for i, record in enumerate(dbElements)
+                                if eval('record' + keyToCompare) == baseOfExpectedValue ] ) )
+
+        return result
+
+    except:
         return False
 
 
