@@ -3,6 +3,10 @@ import os
 import general
 
 
+draftUsersDB = [{ "login": "guest", "password": "", "hasPassword": False }]
+
+
+
 class UsersDB:
     def __init__(self):
         self.location = os.path.expanduser('usersdb.db')
@@ -10,31 +14,18 @@ class UsersDB:
 
 
     def loadUsersDB(self, location):
-        draftUserDB = [{ "login": "guest", "password": "", "hasPassword": False }]
-        if os.path.exists(location):
-            try:
-                self.db = json.load(open(self.location, 'r', encoding="utf-8"))
-            except:
-                self.db = draftUserDB
-        else:
-            self.db = draftUserDB
-        return True
+        newDB = general.loadDB(location)
+        self.db = newDB  if newDB  else draftUsersDB
 
 
     def doesUsersRecordExist(self, login):
-        checkingResult = self.getUserRecord(login) != None
-        if not checkingResult: general.printInformation('', 'Może chcesz się zalogować jako gość? Wpisz "guest"')
+        checkingResult = bool( self.getUsersRecord(login) )
         return checkingResult
 
 
     def getUsersRecord(self, login):
-        result = None
-        try:
-            result = [record  for record in self.db  if record['login'] == login][0]
-        except:
-            general.alertProblemExist('rekordem użytkownika')
-        finally:
-            return result
+        result = general.getDBRecordByKeyValue(self.db, 'login', login, 'użytkownika')
+        return result
 
 
     def checkUsersRecordKeyValue(self, login, key, value):
