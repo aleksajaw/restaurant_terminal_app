@@ -552,13 +552,15 @@ def checkIfDBRecordExist(dbElements = [], keyToCompare = 'id', baseOfExpectedVal
         return False
 
 
-def generateRandomID(dbElements = [], idKey = 'id'):
+def generateUniqueRandomID(dbElements = [], idKey = 'id'):
     isIDInUse = True
-    while isIDInUse:
-        availableID = random.randint(111111, 999999)
-        isIDInUse = bool (len([i  for i, el in enumerate(dbElements)  if el[idKey] == availableID]))
 
-    return availableID
+    while isIDInUse:
+        generatedID = random.randint(111111, 999999)
+        isIDInUse = checkIfDBRecordExist(dbElements, idKey, generatedID, False)
+
+    return generatedID
+
 
 
 

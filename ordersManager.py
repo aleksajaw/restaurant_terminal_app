@@ -77,7 +77,7 @@ class Order:
 
     def setOrderID(self, value):
         if not value:
-            value = general.generateRandomID(ordersDBController.getAllOrdersRecords(), 'orderID')
+            value = general.generateUniqueRandomID(ordersDBController.getAllOrdersRecords(), 'orderID')
         self.orderID = value
 
 
@@ -97,7 +97,6 @@ class Order:
         
     def getTime(self):
         return self.dateTime
-    
 
 
     def createNew(self):
