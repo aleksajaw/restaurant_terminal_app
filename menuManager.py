@@ -323,10 +323,10 @@ class Menu:
         self.printMenu()
         if len(self.dishList):
             position = self.getMenuPositionNumber('do usunięcia')
-            menuDBController.deleteMenuRecord(position-1)
-            self.loadMenu()
-            general.alertDeletion('pozycję numer ' + str(position) + ' w menu')
-            self.printMenu()
+            if menuDBController.deleteMenuRecord(position-1):
+                self.loadMenu()
+                general.alertDeletion('pozycję numer ' + str(position) + ' w menu')
+                self.printMenu()
     
         else:
             general.alertYouCannot('dokonać usunięcia')

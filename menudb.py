@@ -105,6 +105,7 @@ class MenuDB:
             self.dumpMenuDB()
             return True
         except:
+            general.alertProblemExist('usunięciem rekordu')
             return False
         
 
