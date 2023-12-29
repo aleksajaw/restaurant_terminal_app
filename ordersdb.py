@@ -51,12 +51,14 @@ class OrdersDB:
 
     def deleteOrdersRecord(self, id):
         try:
-            result = [  i
+            index = [  i
                         for i, record in enumerate(self.db)
-                            if record['orderId'] == id ]
-            #print(str(result))
-            return result
+                            if record['orderID'] == id ][0]
+            del self.db[index]
+            self.dumpOrdersDB()
+            return True
         except:
+            general.alertProblemExist('usunięciem rekordu')
             return False
         #try:
         #    obj = json.loads(obj)
