@@ -253,10 +253,10 @@ class Orders:
         
         self.printOrders()
         orderId = self.getOrderIdNumber('do usunięcia')
-        ordersDBController.deleteOrdersRecord(orderId)
-        self.loadOrders()
-        general.alertDeletion('zamówienie numer ' + str(orderId))
-        self.printOrders()
+        if ordersDBController.deleteOrdersRecord(orderId):
+            self.loadOrders()
+            general.alertDeletion('zamówienie numer ' + str(orderId))
+            self.printOrders()
 
 
     def addOrder(self):
