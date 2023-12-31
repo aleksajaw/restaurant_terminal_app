@@ -210,24 +210,24 @@ class Order:
 
 class Orders:
     def __init__(self):
-        self.list = []
+        self.orderList = []
         self.loadOrders()
 
 
     def loadOrders(self):
-        self.list = []
+        self.orderList = []
         for order in ordersDBController.getAllOrdersRecords():
             try:
                 orderValue = Order(**order)
             except:
                 orderValue = Order(order)
             formattedOrder = orderValue
-            self.list.append(formattedOrder)
+            self.orderList.append(formattedOrder)
 
 
     def printOrders(self):
         msg = ''
-        for i, order in enumerate(self.list):
+        for i, order in enumerate(self.orderList):
             if i > 0:
                 msg += '\n' * 2
             msg += order.getFullInfo()
@@ -236,6 +236,11 @@ class Orders:
             general.alertNoElements('zamówień')
 
     
+    def refreshOrders(self):
+        self.loadOrders()
+        self.printOrders()
+
+
     def getOrderIdNumber(self, partOfText):
         inputCommandText = 'numer id zamówienia'
         if inputCommandText:
@@ -251,12 +256,11 @@ class Orders:
         from stepsManager import makeStepInApp
         makeStepInApp(+1)
         
-        if len(self.list):
+        if len(self.orderList):
             self.printOrders()
-            orderId = self.getOrderIdNumber('do usunięcia')
-            if ordersDBController.deleteOrdersRecord(orderId):
-                self.loadOrders()
-                self.printOrders()
+            orderID = self.getOrderIdNumber('do usunięcia')
+            if ordersDBController.deleteOrdersRecord(orderID):
+                self.refreshOrders()
         else:
             general.alertYouCannot('dokonać usunięcia')
 
@@ -269,9 +273,9 @@ class Orders:
         newOrder = Order()
         newOrder.createNew()
         if ordersDBController.addOrdersRecord(general.getJSON(newOrder)):
-            self.loadOrders()
-            self.printOrders()
-        #general.alertAddition('nową pozycję do menu')
+            self.refreshOrders()
+
+
 
 
 ordersController = Orders()
