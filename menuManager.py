@@ -320,14 +320,13 @@ class Menu:
         from stepsManager import makeStepInApp
         makeStepInApp(+1)
         
-        self.printMenu()
         if len(self.dishList):
+            self.printMenu()
             position = self.getMenuPositionNumber('do usunięcia')
             if menuDBController.deleteMenuRecord(position-1):
                 self.loadMenu()
                 general.alertDeletion('pozycję numer ' + str(position) + ' w menu')
                 self.printMenu()
-    
         else:
             general.alertYouCannot('dokonać usunięcia')
 
@@ -340,18 +339,17 @@ class Menu:
         newMenuElement = MenuElement()
         newMenuElement.createNew()
         newMenuElement.position = self.getMenuElementsLength()+1
-        menuDBController.addMenuRecord(general.getJSON(newMenuElement))
-        self.loadMenu()
-        self.printMenu()
-        #general.alertAddition('nową pozycję do menu')
+        if menuDBController.addMenuRecord(general.getJSON(newMenuElement)):
+            self.loadMenu()
+            self.printMenu()
 
 
     def editMenuElement(self):
         from stepsManager import makeStepInApp
         makeStepInApp(+1)
 
-        self.printMenu()
-        if len(self.dishList):
+        if len(self.dishList): 
+            self.printMenu()
             position = self.getMenuPositionNumber('do edycji')
             menuElToEdit = self.getMenuElement(position)
             menuElBeforeEdit = menuElToEdit
@@ -361,12 +359,9 @@ class Menu:
             if menuElBeforeEdit != menuElToEdit:
                 menuElToSave = menuElToEdit
                 menuElToSave = general.convertToDict(menuElToSave)
-                try:
-                    menuDBController.editMenuRecord(general.getJSON(menuElToSave))
-                finally:
+
+                if menuDBController.editMenuRecord(general.getJSON(menuElToSave)):
                     self.loadMenu()
-                    msg = 'pozycję numer ' + str(position) + ' w menu'
-                    general.alertEdition(msg)
             else:
                 msg = 'pozycją numer ' + str(position) + ' w menu'
                 general.alertDoneNothing(msg)
