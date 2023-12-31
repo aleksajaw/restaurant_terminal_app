@@ -53,6 +53,25 @@ class OrdersDB:
             return False
 
 
+    def editOrdersRecord(self, obj):
+        try:
+            obj = json.loads(obj)
+            id = obj['orderID']
+            index = [ i
+                        for i, record in enumerate(self.db)
+                        if record['orderID'] == id ][0]
+            if index != None:
+                self.db[index] = obj
+                self.dumpOrdersDB()
+                general.alertEdited('zamówienie nr ' + str(id))
+                return True
+            else:
+                raise Exception('Record to edit does not exist')
+        except:
+            general.alertProblemOccured('edytowaniem rekordu: nowe zamówienie')
+            return False
+
+
     def deleteOrdersRecord(self, id):
         try:
             index = [ i

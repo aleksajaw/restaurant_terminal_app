@@ -59,6 +59,22 @@ class OrderElement:
         return general.convertNumberType( totalElementPrice, 'float' )
 
 
+    def editAttrs(self):
+        orderElEditionKeys = [ {
+                                    'name': 'amount',
+                                    'getterFnName': 'Amount()',
+                                    'editValue': 'Amount()'
+                                }]
+
+        #for item in orderElEditionKeys:
+
+        #    itemValue = str(eval('self.' + item['getterFnName']))
+        #    inputCommandText = 'Obecna wartość pola ' + item['name'] + ' to ' + itemValue + '. Czy chcesz ją zmienić? (t/n)'
+        #    doChange = general.getStringBooleanValueWithValidation(inputCommandText)
+        #    if doChange:
+        #        eval('self.input' + item['editValue'])
+
+
     def getFullInfo(self):
         fullInfo = self.dish.getFullInfo()
         fullInfo += '  ' + str(self.getCurrentPrice()) + ' x ' + str(self.amount) + ' = ' + ('%.2f' % self.getTotalElementPrice())
@@ -241,6 +257,10 @@ class Orders:
         self.printOrders()
 
 
+    def getOrderByID(self, id):
+        return general.getDBRecordByKeyValue(self.orderList, 'orderID', id)
+
+
     def getOrderIdNumber(self, partOfText):
         inputCommandText = 'numer id zamówienia'
         if inputCommandText:
@@ -274,6 +294,30 @@ class Orders:
         newOrder.createNew()
         if ordersDBController.addOrdersRecord(general.getJSON(newOrder)):
             self.refreshOrders()
+
+
+    def editOrder(self):
+        import copy
+        from stepsManager import makeStepInApp
+        makeStepInApp(+1)
+
+        if len(self.orderList):
+            self.printOrders()
+            orderID = self.getOrderIdNumber('do usunięcia')
+            orderToEdit = self.getOrderByID(orderID)
+            orderBeforeEdit = copy.deepcopy(orderToEdit)
+
+            for orderElement in orderToEdit.orderElements:
+                orderElement.editAttrs()
+
+            if orderBeforeEdit != orderToEdit:
+                orderToSave = orderToEdit
+                orderToSave = general.convertToDict(orderToSave)
+
+                if ordersDBController.editOrdersRecord(general.getJSON(orderToSave)):
+                    self.refreshOrders()
+        else:
+            general.alertYouCannot('dokonać edycji')
 
 
 
