@@ -276,6 +276,10 @@ class Menu:
             general.alertNoElements('pozycji w menu')
     
 
+    def refreshMenu(self):
+        self.loadMenu()
+        self.printMenu()
+
     def getMenuElement(self, i):
         i = int(i) - 1
         try:
@@ -324,9 +328,7 @@ class Menu:
             self.printMenu()
             position = self.getMenuPositionNumber('do usunięcia')
             if menuDBController.deleteMenuRecord(position-1):
-                self.loadMenu()
-                general.alertDeletion('pozycję numer ' + str(position) + ' w menu')
-                self.printMenu()
+                self.refreshMenu()
         else:
             general.alertYouCannot('dokonać usunięcia')
 
@@ -340,8 +342,7 @@ class Menu:
         newMenuElement.createNew()
         newMenuElement.position = self.getMenuElementsLength()+1
         if menuDBController.addMenuRecord(general.getJSON(newMenuElement)):
-            self.loadMenu()
-            self.printMenu()
+            self.refreshMenu()
 
 
     def editMenuElement(self):
@@ -361,11 +362,10 @@ class Menu:
                 menuElToSave = general.convertToDict(menuElToSave)
 
                 if menuDBController.editMenuRecord(general.getJSON(menuElToSave)):
-                    self.loadMenu()
+                    self.refreshMenu()
             else:
                 msg = 'pozycją numer ' + str(position) + ' w menu'
                 general.alertDoneNothing(msg)
-            self.printMenu()
         else:
             general.alertYouCannot('dokonać edycji')
         
