@@ -29,7 +29,7 @@ def inputStepService(filteredServices = [], servicesInnerController=''):
         callChosenService(filteredServices, servicesInnerController, serviceInput)
 
     else:
-        general.alertNoExist('opcja ' + serviceInput)
+        general.alertDoesNotExist('opcja ' + serviceInput)
         inputStepService(filteredServices, servicesInnerController)
 
 

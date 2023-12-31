@@ -251,12 +251,14 @@ class Orders:
         from stepsManager import makeStepInApp
         makeStepInApp(+1)
         
-        self.printOrders()
-        orderId = self.getOrderIdNumber('do usunięcia')
-        if ordersDBController.deleteOrdersRecord(orderId):
-            self.loadOrders()
-            general.alertDeletion('zamówienie numer ' + str(orderId))
+        if len(self.list):
             self.printOrders()
+            orderId = self.getOrderIdNumber('do usunięcia')
+            if ordersDBController.deleteOrdersRecord(orderId):
+                self.loadOrders()
+                self.printOrders()
+        else:
+            general.alertYouCannot('dokonać usunięcia')
 
 
     def addOrder(self):
@@ -266,9 +268,9 @@ class Orders:
         menuController.printMenu()
         newOrder = Order()
         newOrder.createNew()
-        ordersDBController.addOrdersRecord(general.getJSON(newOrder))
-        self.loadOrders()
-        self.printOrders()
+        if ordersDBController.addOrdersRecord(general.getJSON(newOrder)):
+            self.loadOrders()
+            self.printOrders()
         #general.alertAddition('nową pozycję do menu')
 
 

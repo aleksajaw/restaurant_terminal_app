@@ -37,37 +37,37 @@ class OrdersDB:
     def addOrdersRecord(self, obj):
         try:
             obj = json.loads(obj)
-            result = [record  for record in self.db  if record['date'] == obj['date']]
-            if len(result) == 0:
-                raise Exception('Record does not exist yet')
+            id = obj['orderID']
+            result = [ record
+                            for record in self.db
+                            if record['orderID'] == id ]
+            if not len(result):
+                self.db.append(obj)
+                self.dumpOrdersDB()
+                general.alertAdded('nowe zamówienie')
+                return True
+            else:
+                raise Exception('Record already exists')
         except:
+            general.alertProblemOccured('dodaniem rekordu zamówienia')
             return False
-        
-        finally:
-            self.db.append(obj)
-            self.dumpOrdersDB()
-            return True
 
 
     def deleteOrdersRecord(self, id):
         try:
-            index = [  i
+            index = [ i
                         for i, record in enumerate(self.db)
                             if record['orderID'] == id ][0]
-            del self.db[index]
-            self.dumpOrdersDB()
-            return True
+            if index != None:
+                del self.db[index]
+                self.dumpOrdersDB()
+                general.alertDeleted('zamówienie nr ' + str(id))
+                return True
+            else:
+                raise Exception('Record does not exist')
         except:
-            general.alertProblemExist('usunięciem rekordu')
+            general.alertProblemOccured('usunięciem rekordu: zamówienie nr ' + str(id))
             return False
-        #try:
-        #    obj = json.loads(obj)
-        #    i = self.db.index(obj)
-        #    del self.db[i]
-        #    self.dumpDB()
-        #    return True
-        #except:
-        #    return False
 
 
 

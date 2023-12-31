@@ -190,15 +190,15 @@ def alertNoCommand(command = 'polecenie'):
     alertMain('Wpisz', command)
 
 
-def alertDeletion(element):
+def alertDeleted(element):
     alertMain('Usunięto', element)
 
 
-def alertAddition(element):
+def alertAdded(element):
     alertMain('Dodano', element)
 
 
-def alertEdition(element):
+def alertEdited(element):
     alertMain('Edytowano', element)
 
 
@@ -210,7 +210,7 @@ def alertNoElements(elements):
     alertMain('Brak', elements)
 
 
-def alertNoExist(element):
+def alertDoesNotExist(element):
     alertMain('Nie istnieje',  element)
 
 
@@ -222,7 +222,7 @@ def alertYouCannotGet(command):
     alertYouCannot('uzyskać ' + command)
 
 
-def alertProblemExist(partOfText=''):
+def alertProblemOccured(partOfText=''):
     baseText = 'Wystąpił problem'
     if partOfText: partOfText = 'z ' + partOfText
     alertMain(baseText, partOfText)
@@ -530,7 +530,7 @@ def getDBRecordByKeyValue(dbElements = [], keyName = '', desiredValue = None, al
         msg = 'rekordem'
         if alertText:
             msg = ' ' + alertText
-        alertProblemExist(msg)
+        alertProblemOccured(msg)
         return False
 
 

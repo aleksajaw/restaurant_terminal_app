@@ -73,39 +73,50 @@ class MenuDB:
 
             if len(result) > 0:
                 raise Exception('Record already exist')
-            
+            else:
+                self.db['dishList'].append(obj)
+                self.dumpMenuDB()
+                general.alertAdded('nową pozycję do menu')
+                return True
         except:
+            general.alertProblemOccured('dodaniem rekordu: nowa pozycja w menu')
             return False
-        
-        finally:
-            self.db['dishList'].append(obj)
-            self.dumpMenuDB()
-            return True
 
 
     def editMenuRecord(self, obj):
         try:
             obj = json.loads(obj)
-
-            for i, record in enumerate(self.db['dishList']):
-
-                if record['position'] == obj['position']:
-                    self.db['dishList'][i] = obj
-                    self.dumpMenuDB()
-                    return True
-
+            position = obj['position']
+            index = [ i
+                        for i, record in enumerate(self.db['dishList'])
+                        if record['position'] == position ][0]
+            
+            if index != None:
+                self.db['dishList'][index] = obj
+                self.dumpMenuDB()
+                general.alertEdited('pozycję nr ' + str(position) + ' w menu')
+                return True
+            else:
+                raise Exception('Record to edit does not exist')
         except:
-            return 'Record does not exist yet'
+            general.alertProblemOccured('edycją rekordu: pozycja nr ' + str(position) + ' w menu')
+            #general.alertDoneNothing(msg)
+            return False #'Record does not exist yet'
 
 
     def deleteMenuRecord(self, i):
         try:
-            del self.db['dishList'][i]
-            self.correctAllMenuRecordsPosition()
-            self.dumpMenuDB()
-            return True
+            if i >= 0:
+                del self.db['dishList'][i]
+                self.correctAllMenuRecordsPosition()
+                self.dumpMenuDB()
+                position = i+1
+                general.alertDeleted('pozycję nr ' + str(position) + ' w menu')
+                return True
+            else:
+                raise Exception('Record index does not exist')
         except:
-            general.alertProblemExist('usunięciem rekordu')
+            general.alertProblemOccured('usunięciem rekordu: pozycja numer ' + str(position) + ' w menu')
             return False
         
 
