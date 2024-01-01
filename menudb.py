@@ -65,9 +65,9 @@ class MenuDB:
     def addMenuRecord(self, obj):
         try:
             obj = json.loads(obj)
-            result = [  record
-                        for record in self.db['dishList']
-                            if record.dish['dishName'] == obj.dish['dishName'] ]
+            result = [ record
+                            for record in self.db['dishList']
+                            if record['dish']['dishName'] == obj['dish']['dishName'] ]
             
             #general.printInformation('', result)
 
