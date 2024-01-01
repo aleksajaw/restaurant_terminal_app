@@ -3,12 +3,13 @@ import general
 
 
 draftServicesDB = { 'startServices' : {}, 'mainServices': {}, 'menuServices': {}, 'ordersServices': {}}
+locationServicesDB = 'servicesdb'
 
 
 
 class ServicesDB:
     def __init__(self):
-        self.location = os.path.expanduser('./servicesdb.minify.db')
+        self.location = os.path.expanduser(locationServicesDB)
         self.db = {}
         self.loadServicesDB(self.location)
 

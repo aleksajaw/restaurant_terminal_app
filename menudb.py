@@ -6,7 +6,7 @@ import general
 defaultMenuCurrency = "PLN"
 defaultMenuName = "MENU"
 draftMenuDB = [{ "menuName": defaultMenuName, "menuCurrency": defaultMenuCurrency, "dishList" : []}]
-locationMenuDB = 'menudb.minify.db'
+locationMenuDB = 'menudb'
 
 
 

@@ -3,9 +3,13 @@ import os
 import general
 
 
+locationOrdersDB = 'ordersdb'
+
+
+
 class OrdersDB:
     def __init__(self):
-        self.location = os.path.expanduser('ordersdb.minify.db')
+        self.location = os.path.expanduser(locationOrdersDB)
         self.loadOrdersDB(self.location)
 
 

@@ -486,6 +486,7 @@ def isJSONserializable(el):
 
 def loadDB(location):
     db = []
+    location = 'db/' + location + '.minify.db'
     if os.path.exists(location):
         try:
             db = json.load(open(location, 'r', encoding="utf-8"))
@@ -497,6 +498,7 @@ def loadDB(location):
 
 
 def dumpDB(db, location):
+    location = 'db/' + location + '.minify.db'
     try:
         json.dump(db, open(location, 'w+', encoding="utf-8"))
         return True

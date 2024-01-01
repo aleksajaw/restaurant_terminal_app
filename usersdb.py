@@ -4,12 +4,13 @@ import general
 
 
 draftUsersDB = [{ "login": "guest", "password": "", "hasPassword": False }]
+locationUsersDB = 'usersdb'
 
 
 
 class UsersDB:
     def __init__(self):
-        self.location = os.path.expanduser('usersdb.db')
+        self.location = os.path.expanduser(locationUsersDB)
         self.loadUsersDB(self.location)
 
 
