@@ -9,7 +9,7 @@ defaultWeightUnit = 'g'
 
 class Price:
     def __init__(self, current = 0.0, standard = 0.0, isPromotion = False):
-        self.setStandard(standard)
+        self.setStandard(standard or current)
         self.setCurrent(current or standard)
         self.setIsPromotion(isPromotion)
 
