@@ -347,13 +347,14 @@ class Menu:
 
     def editMenuElement(self):
         from stepsManager import makeStepInApp
+        import copy
         makeStepInApp(+1)
 
         if len(self.dishList): 
             self.printMenu()
             position = self.getMenuPositionNumber('do edycji')
             menuElToEdit = self.getMenuElement(position)
-            menuElBeforeEdit = menuElToEdit
+            menuElBeforeEdit = copy.deepcopy(menuElToEdit)
             menuElToEdit.dish.editAttrs()
             menuElToEdit.editAttrs()
 
