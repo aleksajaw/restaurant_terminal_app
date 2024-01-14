@@ -428,6 +428,9 @@ def getStringBooleanValueWithValidation(introductoryText = '', baseText = '', pa
         if inputValue in stepBackNames:
             stepsManager.stepBack(inputValue)
 
+        elif  not len(inputValue):
+            alertNoCommand()
+            
         elif isNumber(inputValue):
            alertYouCannot(inputAlertText)
            inputValue = ''
@@ -436,7 +439,11 @@ def getStringBooleanValueWithValidation(introductoryText = '', baseText = '', pa
             isInputValueTrue = inputValue in (booleanValues['trueValues'])
             isInputValueFalse = inputValue in (booleanValues['falseValues'])
 
-            return isInputValueTrue and not isInputValueFalse
+            if (isInputValueTrue or isInputValueFalse):
+                return isInputValueTrue and not isInputValueFalse
+            
+            else:
+                alertYouCannot('podać takiej wartości')
 
 
 def getStringInputValueWithValidation(baseText = '', partOfText = '', availableValues = [], defaultValue = None):
