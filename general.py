@@ -376,15 +376,34 @@ def getStringBooleanValueWithValidation(introductoryText = '', baseText = '', pa
         # BEGINNING of the universal part #
 
     ### variables correction & declaration ###
-    baseText = baseText or 'Czy'
+    baseText = baseText
+    questionBeginning = 'Czy'
+    hint = ' (t/n) '
     sentenceMark = '?'
 
     ###
     if partOfText:
         partOfText = ' ' + partOfText 
     
+        if sentenceMark not in partOfText:
+            partOfText += sentenceMark
+        
+        elif hint.strip() not in partOfText:
+            partOfText += hint
+    
+    elif baseText:
+        
+        if questionBeginning not in baseText:
+            baseText += questionBeginning + baseText
+
+        if sentenceMark not in baseText:
+            baseText += sentenceMark
+        
+        if hint.strip() not in baseText:
+            baseText += hint
+
     ###
-    inputCommandText = baseText + partOfText + sentenceMark + ' (t/n) '
+    inputCommandText = baseText + partOfText
 
     ###
     inputAlertText = 'podać liczby jako wartość'
