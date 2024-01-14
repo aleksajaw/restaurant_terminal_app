@@ -98,6 +98,7 @@ stepBackNames = [reminder['name'] for reminder in stepBackReminders]
 def filterStepBackReminders(canGoBack = True):
     global stepBackReminders
     global filteredStepBackReminders
+    global filteredStepBackNames
 
     filteredStepBackReminders = []
     filteredStepBackNames = []
