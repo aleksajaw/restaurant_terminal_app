@@ -172,6 +172,18 @@ def printWelcomeMessage():
 
 
 
+def getGoodbyeMessage():
+    global goodbyeMessage
+    msg = goodbyeMessage
+    return msg
+
+goodbyeMessage = '\n\nZamykanie aplikacji. Do zobaczenia!'
+
+def printGoodbyeMessage():
+    printInformation('', getGoodbyeMessage())
+
+
+
 
 ###   A L E R T S   ###
 
@@ -594,4 +606,5 @@ def generateUniqueRandomID(dbElements = [], idKey = 'id'):
 
 ###   D E F A U L T   A P P   M A N A G E R   ###
 def closeApp():
+    printGoodbyeMessage()
     sys.exit()
